@@ -6,16 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Megrim&display=swap" rel="stylesheet">
     <title>Meme Generator</title>
 </head>
 
 <body onload="onInit()">
     <header class="main-header">
-        <h1 class="logo">LOGO</h1>
+        <h1 class="logo">mememe</h1>
         <span></span>
         <nav class="main-nav">
-            <ul class="flex clean-list nav-list">
-                <li ><button href="#" class="gallery-btn active" onclick="onSwitchToGallery(this)">Gallery</button></li>
+            <ul class="clean-list nav-list">
+                <li><button href="#" class="gallery-btn active" onclick="onSwitchToGallery(this)">Gallery</button></li>
                 <li><a href="#">Meme</a></li>
                 <li><a href="#">About</a></li>
             </ul>
@@ -27,7 +30,8 @@
 
     <section class="gallery-section">
         <form id="search" role="search">
-            <input type="search" class="search-input" name="search" placeholder="Search" onkeyup="onKeyUpSearch(this.value)" >
+            <input type="search" class="search-input" name="search" placeholder="Search"
+                onkeyup="onKeyUpSearch(this.value)">
             <!-- onchange="onFilterMemes(this.value)" -->
             <!-- <input value="Submit" type="submit"> -->
         </form>
@@ -36,7 +40,7 @@
 
     <section class="editor">
         <div class="canvas-container">
-            <canvas id="my-canvas" height="500" width="500" > </canvas>
+            <canvas id="my-canvas" height="500" width="500"> </canvas>
         </div>
         <div class="canvas-ctrl">
             <input type="text" class="inputTxt" placeholder="TEXT LINE">
@@ -45,16 +49,19 @@
                 <button class="line-ctrl-btn move-down-btn" onclick="onMoveDown()"></button> -->
                 <button class="line-ctrl-btn switch-focus-line-btn" onclick="onSwitchFocusLine()"></button>
                 <button class="line-ctrl-btn add-line-btn fa plus text-align-center" onclick="onAddLine()"></button>
-                <button class="line-ctrl-btn delete-line-btn" onclick="onDeleteLine()"></button>                
+                <button class="line-ctrl-btn delete-line-btn" onclick="onDeleteLine()"></button>
                 <!-- <button class="line-ctrl-btn switch-line-btn" onclick="onSwitchLine()"></button> -->
             </div>
             <div class="font-design">
                 <div class="font-alignment">
                     <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="+">A <sup>+</sup></button>
                     <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="-">A <sup>-</sup></button>
-                    <button class="font-btn font-align-btn align-left" onclick="onTextAlign(this)" data-align="left"></button>
-                    <button class="font-btn font-align-btn align-center" onclick="onTextAlign(this)" data-align="center"></button>
-                    <button class="font-btn font-align-btn align-right" onclick="onTextAlign(this)" data-align="right"></button>
+                    <button class="font-btn font-align-btn align-left" onclick="onTextAlign(this)"
+                        data-align="left"></button>
+                    <button class="font-btn font-align-btn align-center" onclick="onTextAlign(this)"
+                        data-align="center"></button>
+                    <button class="font-btn font-align-btn align-right" onclick="onTextAlign(this)"
+                        data-align="right"></button>
                 </div>
                 <div class="font-style">
                     <label for="font-select"></label>
@@ -63,7 +70,7 @@
                         <option value="serif">SERIF</option>
                         <option value="arial">ARIAL</option>
                     </select>
-                    <button class="font-btn font-underline" onclick="onUnderline()" ></button>
+                    <button class="font-btn font-underline" onclick="onUnderline()"></button>
                     <input type="color" class="font-btn  color-pick" onchange="onSetFontColor(this.value)">
                 </div>
             </div>
@@ -73,7 +80,8 @@
                 <button class="meme-ctrl-btn download-btn">
                     <a href="#" onclick="onDownload(this)" download="my-img.jpg">&nbsp;&nbsp; Download</a>
                 </button>
-                <button class="meme-ctrl-btn share-btn" onclick="onShare()"> <img class ="share-icon"  alt=""> Share</button>
+                <button class="meme-ctrl-btn share-btn" onclick="onShare()"> <img class="share-icon" alt="">
+                    Share</button>
             </div>
         </div>
     </section>

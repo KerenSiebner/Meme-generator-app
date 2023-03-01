@@ -46,23 +46,23 @@ function onSwitchToGallery(navGallaryBtn) {
     if (gIsGallery) return
     else {
         toggleMenu()
-        gMeme.lines.splice(0,gMeme.lines.length)
+        gMeme.lines.splice(0, gMeme.lines.length)
         gIsGallery = !gIsGallery
         navGallaryBtn.classList.add('active')
         toggleDisplayEditorOrGallery()
     }
 }
 
-function onKeyUpSearch(){
-    setTimeout(()=>{
+function onKeyUpSearch() {
+    setTimeout(() => {
         const searchStr = document.querySelector('.search-input').value
         const filterBy = setMemeFilterBy(searchStr)
         renderGallery()
         // const searchedMeme = getMemes(inputTxt)
-    },1500)
+    }, 1500)
     // console.log('filteredImgs', filteredImgs)   
 }
 
-// function setMemeFilterBy(searchStr){
-
-// }
+function setMemeFilterBy(searchStr) {
+    gFilterBy = searchStr
+}

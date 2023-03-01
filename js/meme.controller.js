@@ -2,7 +2,7 @@
 
 let gElCanvas
 let gCtx
-let gIsNewLine=false
+let gIsNewLine = false
 let gStartPos
 
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
@@ -44,12 +44,12 @@ function onDown(ev) {
     const pos = getEvPos(ev)
     // console.log('pos', pos)
     const lineClickedIndex = lineClickedIdx(pos)
-    if (lineClickedIndex ===-1) return
+    if (lineClickedIndex === -1) return
     // console.log('lineClickedIndex', lineClickedIndex)
     gMeme.selectedLineIdx = lineClickedIndex
     // window.addEventListener('keypress', onSetLineTxt)
 
-    if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT')  setLineProperties('CLICK ME TO EDIT')
+    // if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT')  setLineProperties('CLICK ME TO EDIT')
     changePlaceHolderTxt()
     setSelectedDrag(true)
     renderMeme()
@@ -63,7 +63,7 @@ function onMove(ev) {
     const { isDrag } = getSelectedLine()
 
     if (!isDrag) return
-    
+
     const pos = getEvPos(ev)
     // Calc the delta , the diff we moved
     const dx = pos.x - gStartPos.x
@@ -87,22 +87,24 @@ function renderMeme() {
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 
     const meme = getMeme()
-    // console.log('meme', meme)
     const lines = meme.lines
-    // console.log('lines[0].txt', lines[0].txt)
     if (lines.length === 0) return
-    
-    lines.forEach(line => drawText(`${line.txt}`, line.x, line.y, line.color, line.size, line.fontFamily, line.isUnderline, line.align) )
+
+    lines.forEach(line => {
+        console.log('line.txt', line.txt)
+        if (line.txt === 'UNDEFINED') { line.txt = 'CLICK ME TO EDIT' }
+        drawText(`${line.txt}`, line.x, line.y, line.color, line.size, line.fontFamily, line.isUnderline, line.align)
+    })
     const selectedLine = lines[meme.selectedLineIdx]
     console.log('selectedLine', selectedLine)
-    if (!selectedLine)return
+    if (!selectedLine) return
     markSelectedLine(selectedLine)
 }
 
 function markSelectedLine(selectedLine) {
-    let x= selectedLine.x
-    const y= selectedLine.y
-    const txt= selectedLine.txt
+    let x = selectedLine.x
+    const y = selectedLine.y
+    const txt = selectedLine.txt
     if (selectedLine.align === 'left') x = x - 100
     else if (selectedLine.align === 'right') x = x + 100
 
@@ -111,17 +113,15 @@ function markSelectedLine(selectedLine) {
         + gCtx.measureText(txt).fontBoundingBoxDescent + 20;
 
     drawFocusRect(x - textWidth / 2, y - textHeight / 2, textWidth, textHeight)
-
 }
 
 function onSetLineTxt(ev) {
     // ev.preventDefault()
     let txt = ev.target.value
-    if(!txt) txt = ev.key
+    if (!txt) txt = ev.key
     // setSelectedLine()
     if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT') setLineProperties('CLICK ME TO EDIT')
     setLineProperties(`${txt}`)
-
     renderMeme()
 }
 
@@ -192,7 +192,7 @@ function onMoveDown() {
 }
 
 function onDownload(elLink) {
-    gMeme.selectedLineIdx=null
+    gMeme.selectedLineIdx = null
     renderMeme()
     const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
     elLink.href = imgContent

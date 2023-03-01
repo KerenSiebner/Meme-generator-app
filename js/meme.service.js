@@ -46,7 +46,8 @@ function setDefaultMemeLines() {
         isUnderline: 0,
         x: gElCanvas.width * 0.5,
         y: 100,
-        isDrag: false
+        isDrag: false,
+        contenteditable: true
     }, {
         txt: 'CLICK ME TO EDIT',
         size: 30,
@@ -86,6 +87,7 @@ function getTxtLines() {
 
 //TODO-3 update gMeme from user input
 function setLineProperties(inputTxt) {
+    console.log('inputTxt', inputTxt)
     //first letter create new line
     console.log('inputTxt', inputTxt)
     if (inputTxt.length === 1 && !gIsFirstTwoLines) {
@@ -95,7 +97,7 @@ function setLineProperties(inputTxt) {
         let y = gElCanvas.height / 2
         if (numberOfLines === 0) y = 100
         else if (numberOfLines === 1) y = gElCanvas.height - 100
-        gMeme.lines.push(_createLine(inputTxt.toUpperCase(), x, y))
+        gMeme.lines.push(_createLine(inputTxt?.toUpperCase(), x, y))
         // gIsNewLine=false
         gMeme.selectedLineIdx = numberOfLines
     } else {
@@ -170,7 +172,8 @@ function clearInputTxt() {
 function changePlaceHolderTxt() {
     var elTxt = document.querySelector('.inputTxt')
     // console.log('elTxt.value', elTxt.value)
-    const selectedBoxTxt = gMeme.lines[gMeme.selectedLineIdx].txt
+    let selectedBoxTxt = gMeme.lines[gMeme.selectedLineIdx].txt
+    console.log('selectedBoxTxt', selectedBoxTxt)
     elTxt.value = selectedBoxTxt
 }
 
